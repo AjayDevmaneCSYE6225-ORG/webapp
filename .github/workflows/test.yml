@@ -20,7 +20,7 @@ jobs :
                 node-version : '14'
             
             - name : Install Node.js dependencies
-              run : npm install
+              run : ech
 
             - name : Execute exit 1 for failure testing
               if: failure()
