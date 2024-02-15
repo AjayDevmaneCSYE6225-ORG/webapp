@@ -1,4 +1,4 @@
-name : CI for Node.js
+name : node.js
 
 on :
     pull_request :
@@ -19,8 +19,8 @@ jobs :
               with :
                 node-version : '14'
             
-            - name : Install Node.js dependencies
-              run : npm install
+#            - name : Install Node.js dependencies
+#              run : npm install
 
             - name : Execute exit 1 for failure testing
               if: failure()
@@ -28,4 +28,4 @@ jobs :
 
             - name : Print on Success
               if : ${{ success() }}
-              run : echo "The workflow run was successfull."
+              run : echo "The workflow run was successful."
