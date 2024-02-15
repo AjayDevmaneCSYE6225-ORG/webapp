@@ -81,7 +81,7 @@ Commands:
 3. sequelize init
 
 References:
-1. 
+1. https://www.youtube.com/watch?v=5m636rybfdg
 
 Create User:
 
