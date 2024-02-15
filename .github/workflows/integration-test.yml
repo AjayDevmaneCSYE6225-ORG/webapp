@@ -34,7 +34,6 @@ jobs:
 
       - name: creating database
         run: |
-          echo ${{ secrets.DB_USERNAME }}
           mysql -h ${{ secrets.DB_HOST }} --port ${{ secrets.PORT }} -u${{ secrets.DB_USERNAME }} -p${{ secrets.DB_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS ${{ secrets.DB_NAME }};"
           mysql -u${{ secrets.DB_USERNAME }} -p${{ secrets.DB_PASSWORD }} -e "USE ${{ secrets.DB_NAME }};" || exit 1
 
