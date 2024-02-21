@@ -20,9 +20,9 @@ build {
   sources = ["googlecompute.centos_packer_build"]
   provisioner "shell" {
     scripts = [
-      "Assignment02/packer/mysql_install.sh",
-      "Assignment02/packer/node_install.sh",
-      "Assignment02/packer/unzip_install.sh"
+      "packer/mysql_install.sh",
+      "packer/node_install.sh",
+      "packer/unzip_install.sh"
     ]
   }
 
