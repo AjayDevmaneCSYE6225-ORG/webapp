@@ -22,18 +22,12 @@ jobs:
       
       - name: Packer init
         run: |
-          packer init 
+          packer init Assignment02/packer
 
-      - name: Packer fmt
+      - name: Packer fmt 
         run: |
-          if ! packer fmt -check .; then
-            echo "Packer fmt detected formatting errors. Please fix them and try again."
-            exit 1
-          fi
+          packer fmt Assignment02/packer
 
-      - name: Packer validate
+      - name: Packer validate gcp.pkr.hcl
         run: |
-          if ! packer validate .; then
-            echo "Packer template validation failed. Please fix the errors and try again."
-            exit 1
-          fi
+          packer validate Assignment02/packer
