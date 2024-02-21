@@ -27,7 +27,7 @@ build {
   }
 
   provisioner "file" {
-    source      = "Assignment02/.env"
+    source      = ".env"
     destination = "/tmp/cloud"
   }
 
@@ -37,7 +37,7 @@ build {
   }
 
   provisioner "file" {
-    source      = "/Users/ajaysubashdevmane/CSYE6225/Assignments/webapp-FORK/Assignment02/csye6225.service"
+    source      = "csye6225.service"
     destination = "/etc/systemd/system"
   }
 
