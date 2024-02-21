@@ -20,20 +20,20 @@ build {
   sources = ["googlecompute.centos_packer_build"]
   provisioner "shell" {
     scripts = [
-      "~/mysql_install.sh",
-      "~/node_install.sh",
-      "~/unzip_install.sh"
+      "packer/mysql_install.sh",
+      "packer/node_install.sh",
+      "packer/unzip_install.sh"
     ]
   }
 
   provisioner "file" {
-    source      = "/Users/ajaysubashdevmane/CSYE6225/Assignments/webapp-FORK/Assignment02/.env"
-    destination = "/path/to/destination/on/vm.txt"
+    source      = "Assignment02/.env"
+    destination = "/tmp/cloud"
   }
 
   provisioner "file" {
     source      = "webapp.zip"
-    destination = "/path/to/destination/on/vm.txt"
+    destination = "/tmp/cloud"
   }
 
   provisioner "file" {
