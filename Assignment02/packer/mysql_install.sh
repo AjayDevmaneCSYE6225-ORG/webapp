@@ -49,5 +49,5 @@ DB_USERNAME="root"
 DB_PASSWORD="herculesa27r1"
 DB_HOST="localhost"
 
-mysql -h $DB_HOST --port $PORT -u $DB_USERNAME -p $secrets.DB_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
+mysql -h $DB_HOST --port $PORT -u $DB_USERNAME -p $DB_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
 mysql -u $DB_USERNAME -p $DB_PASSWORD -e "USE $DB_NAME;" || exit 1
