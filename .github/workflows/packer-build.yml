@@ -1,0 +1,86 @@
+name: Build Packer Custom Image
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  build-image:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - uses: actions-hub/gcloud@master
+        with:
+          args: info
+    
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+
+      # - name: 'Use gcloud CLI'
+      #   run: 'gcloud info'
+
+      - name: Install node.js dependencies
+        run: |
+          cd Assignment02
+          npm install
+
+      - name: Install mysql
+        run: |
+          sudo apt-get update
+          sudo apt-get install mysql-server
+          sudo apt-get install mysql-client
+          sudo systemctl start mysql
+          sudo systemctl status mysql
+
+      - name: creating database
+        run: |
+          mysql -h ${{ secrets.DB_HOST }} --port ${{ secrets.PORT }} -u${{ secrets.DB_USERNAME }} -p${{ secrets.DB_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS ${{ secrets.DB_NAME }};"
+          mysql -u${{ secrets.DB_USERNAME }} -p${{ secrets.DB_PASSWORD }} -e "USE ${{ secrets.DB_NAME }};" || exit 1
+
+      - name: Run integration tests
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          PORT: ${{ secrets.PORT }}
+        run: |
+          cd Assignment02
+          npm run test
+
+      - name: deleting redundant data
+        run: |
+          mysql -u${{ secrets.DB_USERNAME }} -p${{ secrets.DB_PASSWORD }} -e "DROP DATABASE ${{ secrets.DB_NAME }};"
+
+      - name: Build application artifact
+        run: |
+          zip -r webapp.zip ../webapp
+
+      - name: Install Packer
+        run: |
+          wget https://releases.hashicorp.com/packer/1.7.5/packer_1.7.5_linux_amd64.zip
+          unzip packer_1.7.5_linux_amd64.zip
+          sudo mv packer /usr/local/bin/
+  
+      - name: Run packer init
+        run: packer init packer-GCP/packer-GCP.pkr.hcl
+  
+      - name: Check Packer format
+        id: fmt
+        run: packer fmt -check packer-GCP/packer-GCP.pkr.hcl
+  
+      - name: Check Packer validate
+        id: validate
+        run: packer validate packer-GCP/packer-GCP.pkr.hcl
+
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
