@@ -39,4 +39,4 @@ jobs:
       - name: packer build
         run: |
           cd Assignment02
-          packer init packer
+          packer build packer
