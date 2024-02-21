@@ -36,10 +36,10 @@ build {
     destination = "~/webapp.zip"
   }
 
-  provisioner "file" {
-    source      = "csye6225.service"
-    destination = "/etc/systemd/system"
-  }
+  // provisioner "file" {
+  //   source      = "csye6225.service"
+  //   destination = "/etc/systemd/system"
+  // }
 
 
 }
