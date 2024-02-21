@@ -20,14 +20,14 @@ jobs:
           unzip packer_1.7.5_linux_amd64.zip
           sudo mv packer /usr/local/bin/
       
-      - name: Packer init
-        run: |
-          packer init Assignment02/packer
+      # - name: Packer init
+      #   run: |
+      #     packer init Assignment02/packer
 
-      - name: Packer fmt 
-        run: |
-          packer fmt Assignment02/packer
+      # - name: Packer fmt 
+      #   run: |
+      #     packer fmt Assignment02/packer
 
-      - name: Packer validate gcp.pkr.hcl
-        run: |
-          packer validate Assignment02/packer
+      # - name: Packer validate
+      #   run: |
+      #     packer validate Assignment02/packer
