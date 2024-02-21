@@ -19,7 +19,7 @@ jobs:
       
       - name: Unzip artifact
         run: |
-          unzip webapp.zip
+          unzip ../webapp/webapp.zip
 
       - name: Install Packer
         run: |
@@ -29,10 +29,12 @@ jobs:
 
       - name: packer init
         run: |
-          packer init Assignment02/packer
+          cd Assignment02
+          packer init packer
   
       - name: packer validate
         run: |
-          packer validate Assignment02/packer
+          cd Assignment02
+          packer validate packer
 
 
