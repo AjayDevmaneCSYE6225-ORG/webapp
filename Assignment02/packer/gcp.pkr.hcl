@@ -26,14 +26,14 @@ build {
     ]
   }
 
-  provisioner "file" {
-    source      = ".env"
-    destination = "/tmp/cloud"
-  }
+  // provisioner "file" {
+  //   source      = ".env"
+  //   destination = "/tmp/cloud"
+  // }
 
   provisioner "file" {
-    source      = "webapp.zip"
-    destination = "/tmp/cloud"
+    source      = "/home/runner/work/webapp/webapp/webapp.zip"
+    destination = "~/webapp.zip"
   }
 
   provisioner "file" {
