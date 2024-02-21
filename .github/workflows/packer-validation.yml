@@ -16,6 +16,10 @@ jobs:
       - name: Build application artifact
         run: |
           zip -r webapp.zip ../webapp
+      
+      - name: Unzip artifact
+        run: |
+          unzip webapp.zip
 
       - name: Install Packer
         run: |
