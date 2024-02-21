@@ -33,13 +33,12 @@ build {
 
   provisioner "file" {
     source      = "/home/runner/work/webapp/webapp/webapp.zip"
-    destination = "~/webapp.zip"
+    destination = "/home/ajaysubashdevmane/webapp.zip"
   }
 
   // provisioner "file" {
   //   source      = "csye6225.service"
   //   destination = "/etc/systemd/system"
   // }
-
 
 }
