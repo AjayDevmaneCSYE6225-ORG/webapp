@@ -22,8 +22,7 @@ build {
     scripts = [
       "packer/mysql_install.sh",
       "packer/node_install.sh",
-      "packer/unzip_install.sh",
-      "packer/unzip-service.sh"
+      "packer/unzip_install.sh"
     ]
   }
 
@@ -34,7 +33,13 @@ build {
 
   provisioner "file" {
     source      = "/home/runner/work/webapp/webapp/webapp.zip"
-    destination = "/tmp/webapp.zip"
+    destination = "/opt/webapp.zip"
+  }
+
+  provisioner "shell" {
+    scripts = [
+      "packer/unzip-service.sh"
+    ]
   }
 
   // provisioner "file" {
