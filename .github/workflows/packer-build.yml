@@ -1,0 +1,43 @@
+name: packerbuild
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+          - main
+
+jobs:
+  packer-check:
+    name: Packer Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: actions-hub/gcloud@master
+        with:
+          args: info
+    
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      # - name: 'Set up Cloud SDK'
+      #   uses: 'google-github-actions/setup-gcloud@v2'
+      
+      # - name: Packer init
+      #   run: |
+      #     packer init Assignment02/packer
+
+      # - name: Packer fmt 
+      #   run: |
+      #     packer fmt Assignment02/packer
+
+      # - name: Packer validate
+      #   run: |
+      #     packer validate Assignment02/packer
+
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
