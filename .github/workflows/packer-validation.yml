@@ -2,9 +2,9 @@ name: packervalidation
 
 on:
   pull_request:
-    types: [closed]
     branches:
-          - main
+      - main
+  workflow_dispatch :
 
 jobs:
   build-image:

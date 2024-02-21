@@ -2,8 +2,9 @@ name: packerbuild
 
 on:
   pull_request:
+    types: [closed]
     branches:
-      - main
+          - main
 
 jobs:
   packer-check:
