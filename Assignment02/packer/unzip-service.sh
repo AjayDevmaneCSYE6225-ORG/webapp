@@ -1,6 +1,7 @@
 #!/bin/bash
 
-sudo mkdir /opt/unzippedWebapp
+sudo mkdir /tmp/unzippedWebapp
+sudo mv /tmp/webapp.zip /opt/
 sudo unzip -o /opt/webapp.zip -d /opt/unzippedWebapp
 cd /opt/unzippedWebapp/Assignment02
 sudo npm install
