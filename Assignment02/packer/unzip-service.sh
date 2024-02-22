@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo mkdir /tmp/unzippedWebapp
+sudo mkdir /opt/unzippedWebapp
 sudo mv /tmp/webapp.zip /opt/
 sudo unzip -o /opt/webapp.zip -d /opt/unzippedWebapp
 
