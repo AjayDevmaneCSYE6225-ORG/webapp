@@ -48,4 +48,6 @@ DB_NAME="csye6225"
 DB_USERNAME="root"
 DB_HOST="localhost"
 
-sudo mysql -h $DB_HOST --port $PORT -u $DB_USERNAME -p $ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
+# sudo mysql -h $DB_HOST --port $PORT -u $DB_USERNAME -p $ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
+
+mysql --user="$DB_USERNAME" --password="$ROOT_PASSWORD" --host="$DB_HOST" --port="$PORT" --execute="CREATE DATABASE IF NOT EXISTS $DB_NAME;"
