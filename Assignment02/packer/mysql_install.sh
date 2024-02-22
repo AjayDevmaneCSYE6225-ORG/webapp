@@ -49,4 +49,4 @@ DB_USERNAME="root"
 DB_HOST="localhost"
 
 mysql -h $DB_HOST --port $PORT -u $DB_USERNAME -p $ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
-mysql -u $DB_USERNAME -p $DB_PASSWORD -e "USE $DB_NAME;" || exit 1
+mysql -u $DB_USERNAME -p $ROOT_PASSWORD -e "USE $DB_NAME;" || exit 1
