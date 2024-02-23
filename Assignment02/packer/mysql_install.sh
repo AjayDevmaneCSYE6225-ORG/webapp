@@ -2,6 +2,7 @@
 
 sudo dnf -y install expect
 sudo dnf install -y mysql-server
+sudo systemctl enable mssqld
 sudo systemctl start mysqld.service
 sudo systemctl status mysqld
 
