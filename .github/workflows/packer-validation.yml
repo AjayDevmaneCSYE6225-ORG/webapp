@@ -20,12 +20,13 @@ jobs:
 
       - name: create .env
         run: |
-          sudo touch .env
-          sudo echo "PORT=3000" >> .env
-          sudo echo "DB_NAME=csye6225" >> .env
-          sudo echo "DB_USERNAME=root" >> .env
-          sudo echo "DB_PASSWORD=Hello@123" >> .env
-          sudo echo "DB_HOST=localhost" >> .env
+          touch .env
+          echo "PORT=3000" >> .env
+          echo "DB_NAME=csye6225" >> .env
+          echo "DB_USERNAME=root" >> .env
+          echo "DB_PASSWORD=Hello@123" >> .env
+          echo "DB_HOST=localhost" >> .env
+          echo $(pwd)
 
       - name: Install Packer
         run: |
