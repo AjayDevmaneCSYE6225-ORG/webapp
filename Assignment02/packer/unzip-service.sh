@@ -8,7 +8,7 @@ sudo systemctl enable mysqld
 cd /opt/unzippedWebapp/Assignment02
 sudo rm -rf node_modules
 
-touch .env
+sudo touch .env
 echo "PORT=3000" > .env
 echo "DB_NAME=csye6225" >> .env
 echo "DB_USERNAME=root" >> .env
