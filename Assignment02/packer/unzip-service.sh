@@ -9,11 +9,11 @@ cd /opt/unzippedWebapp/Assignment02
 sudo rm -rf node_modules
 
 sudo touch .env
-echo "PORT=3000" > .env
-echo "DB_NAME=csye6225" >> .env
-echo "DB_USERNAME=root" >> .env
-echo "DB_PASSWORD=Hello@123" >> .env
-echo "DB_HOST=localhost" >> .env
+sudo echo "PORT=3000" > .env
+sudo echo "DB_NAME=csye6225" >> .env
+sudo echo "DB_USERNAME=root" >> .env
+sudo echo "DB_PASSWORD=Hello@123" >> .env
+sudo echo "DB_HOST=localhost" >> .env
 
 sudo npm install
 sudo mv /opt/unzippedWebapp/Assignment02/csye6225.service /etc/systemd/system
