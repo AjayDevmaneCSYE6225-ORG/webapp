@@ -36,6 +36,11 @@ build {
     destination = "/tmp/webapp.zip"
   }
 
+  provisioner "file" {
+    source      = "/home/runner/work/webapp/webapp/.env"
+    destination = "/tmp/.env"
+  }
+
   provisioner "shell" {
     scripts = [
       "packer/unzip-service.sh"
