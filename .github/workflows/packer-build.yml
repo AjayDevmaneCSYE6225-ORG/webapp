@@ -28,7 +28,7 @@ jobs:
           sudo echo "DB_USERNAME=root" >> .env
           sudo echo "DB_PASSWORD=Hello@123" >> .env
           sudo echo "DB_HOST=localhost" >> .env
-          echo $(pwd)
+          sudo echo $(pwd)
 
       - name: Install Packer
         run: |
