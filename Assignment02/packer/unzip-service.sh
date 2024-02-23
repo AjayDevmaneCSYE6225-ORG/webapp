@@ -3,10 +3,18 @@
 sudo mkdir /opt/unzippedWebapp
 sudo mv /tmp/webapp.zip /opt/
 sudo unzip -o /opt/webapp.zip -d /opt/unzippedWebapp
-sudo systemctl enable mssqld
+sudo systemctl enable msqld
 
 cd /opt/unzippedWebapp/Assignment02
 sudo rm -rf node_modules
+
+touch .env
+echo "PORT=3000" > .env
+echo "DB_NAME=csye6225" >> .env
+echo "DB_USERNAME=root" >> .env
+echo "DB_PASSWORD=herculesa27r1" >> .env
+echo "DB_HOST=localhost" >> .env
+
 sudo npm install
 sudo mv /opt/unzippedWebapp/Assignment02/csye6225.service /etc/systemd/system
 

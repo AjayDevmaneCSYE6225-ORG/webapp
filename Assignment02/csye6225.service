@@ -1,6 +1,6 @@
 [Unit]
 Description=CSYE 6225 App
-ConditionPathExists=/opt/application.properties
+ConditionPathExists=/opt/unzippedWebapp/Assignment02
 After=network.target
 
 [Service]
