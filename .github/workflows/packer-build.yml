@@ -20,6 +20,16 @@ jobs:
           zip -r webapp.zip .
           echo $(pwd)
 
+      - name: create .env
+        run: |
+          sudo touch .env
+          sudo echo "PORT=3000" >> .env
+          sudo echo "DB_NAME=csye6225" >> .env
+          sudo echo "DB_USERNAME=root" >> .env
+          sudo echo "DB_PASSWORD=Hello@123" >> .env
+          sudo echo "DB_HOST=localhost" >> .env
+          echo $(pwd)
+
       - name: Install Packer
         run: |
           wget https://releases.hashicorp.com/packer/1.7.5/packer_1.7.5_linux_amd64.zip
