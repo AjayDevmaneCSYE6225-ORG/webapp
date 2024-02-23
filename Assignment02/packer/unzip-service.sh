@@ -3,6 +3,7 @@
 sudo mkdir /opt/unzippedWebapp
 sudo mv /tmp/webapp.zip /opt/
 sudo unzip -o /opt/webapp.zip -d /opt/unzippedWebapp
+sudo systemctl enable mssqld
 
 cd /opt/unzippedWebapp/Assignment02
 sudo rm -rf node_modules

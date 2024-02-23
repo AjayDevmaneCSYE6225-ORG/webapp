@@ -42,6 +42,17 @@ build {
     ]
   }
 
+  provisioner "file" {
+    content     = <<-EOF
+    PORT=3000
+    DB_NAME=csye6225
+    DB_USERNAME=root
+    DB_PASSWORD=herculesa27r1
+    DB_HOST=localhost
+    EOF
+    destination = "/opt/unzippedWebapp/Assignment02/.env"
+  }
+
   // provisioner "file" {
   //   source      = "csye6225.service"
   //   destination = "/etc/systemd/system"
