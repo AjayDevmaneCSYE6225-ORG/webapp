@@ -22,12 +22,12 @@ jobs:
 
       - name: create .env
         run: |
-          touch .env
-          echo "PORT=3000" >> .env
-          echo "DB_NAME=csye6225" >> .env
-          echo "DB_USERNAME=root" >> .env
-          echo "DB_PASSWORD=Hello@123" >> .env
-          echo "DB_HOST=localhost" >> .env
+          touch /home/.env
+          echo "PORT=3000" >> /home/.env
+          echo "DB_NAME=csye6225" >> /home/.env
+          echo "DB_USERNAME=root" >> /home/.env
+          echo "DB_PASSWORD=Hello@123" >> /home/.env
+          echo "DB_HOST=localhost" >> /home/.env
           echo $(pwd)
 
       - name: Install Packer
