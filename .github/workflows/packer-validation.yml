@@ -39,10 +39,10 @@ jobs:
           cd Assignment02
           packer init packer
 
-      - name: packer init
+      - name: packer fmt
         run: |
           cd Assignment02
-          packer init packer
+          packer fmt packer
   
       - name: packer validate
         run: |
