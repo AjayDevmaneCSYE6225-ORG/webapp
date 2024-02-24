@@ -23,7 +23,7 @@ build {
       "packer/mysql_install.sh",
       "packer/node_install.sh",
       "packer/unzip_install.sh"
-    ]
+    
   }
 
   // provisioner "file" {
