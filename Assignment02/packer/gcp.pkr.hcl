@@ -12,9 +12,9 @@ source "googlecompute" "centos_packer_build" {
   source_image_family = var.source_image_family
   ssh_username        = var.ssh_username
   zone                = var.gcp_zone
+  image_name          = "my-custom-image"
 }
 
-// we need a file provisioner here 
 
 build {
   sources = ["googlecompute.centos_packer_build"]

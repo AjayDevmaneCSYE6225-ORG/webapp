@@ -1,12 +1,15 @@
 #!/bin/bash
 
 sudo mkdir /opt/unzippedWebapp
+
 sudo groupadd csye6225
 sudo useradd -g csye6225 csye6225
-sudo chown -R csye6225:csye6225 /opt/unzippedWebapp/Assignment02
+
 sudo mv /tmp/webapp.zip /opt/
 sudo unzip -o /opt/webapp.zip -d /opt/unzippedWebapp
+sudo chown -R csye6225:csye6225 /opt/unzippedWebapp/Assignment02
 sudo mv /tmp/.env /opt/unzippedWebapp/Assignment02
+
 sudo systemctl enable mysqld
 
 cd /opt/unzippedWebapp/Assignment02
