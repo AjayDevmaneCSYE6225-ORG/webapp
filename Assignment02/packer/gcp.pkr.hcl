@@ -8,7 +8,7 @@ packer {
 }
 
 source "googlecompute" "centos_packer_build" {
-  project_id          = var.gcp_project_id
+  project_id                      = var.gcp_project_id
   source_image_family = var.source_image_family
   ssh_username        = var.ssh_username
   zone                = var.gcp_zone
@@ -23,7 +23,7 @@ build {
       "packer/mysql_install.sh",
       "packer/node_install.sh",
       "packer/unzip_install.sh"
-    ]
+    
   }
 
   // provisioner "file" {
