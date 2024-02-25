@@ -4,6 +4,7 @@ sudo mkdir /opt/unzippedWebapp
 
 sudo groupadd csye6225
 sudo useradd -g csye6225 csye6225
+sudo usermod -s /sbin/nologin csye6225
 
 sudo mv /tmp/webapp.zip /opt/
 sudo unzip -o /opt/webapp.zip -d /opt/unzippedWebapp

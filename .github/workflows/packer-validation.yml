@@ -42,7 +42,7 @@ jobs:
       - name: packer fmt
         run: |
           cd Assignment02
-          packer fmt packer
+          packer fmt -check packer
   
       - name: packer validate
         run: |

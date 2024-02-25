@@ -118,7 +118,57 @@ Assignment03:
 Commands:
 
 References:
-1.https://stackoverflow.com/questions/41283955/github-keeps-saying-this-branch-is-x-commits-ahead-y-commits-behind
-2. 1. https://blog.searce.com/build-machine-images-with-packer-on-google-cloud-platform-b43f77f1acd
-3. this is for trial ta
-4. this for trial grading
+1. https://www.easydeploy.io/blog/create-vpc-network-using-terraform-in-gcp/
+2. https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/getting_started
+3. https://www.youtube.com/watch?v=5m636rybfdg
+4. https://www.youtube.com/watch?v=XJkB63Hrrjo&list=PL_OdF9Z6GmVZLkHKoSR6XZK6NArfyMxUB&index=3
+5. https://tariqul-islam-rony.medium.com/simple-rest-api-builing-with-mysql-and-express-js-and-testing-with-mocha-and-chai-ed0d19f25f79
+6. https://github.com/mochajs/mocha/issues/1066
+7. https://medium.com/nodejsmadeeasy/elegant-ways-to-pass-env-variables-to-mocha-test-cases-4486cb238bb1
+8. https://gonzalovazquez.medium.com/integration-testing-with-supertest-f107304adae2
+9. https://stackoverflow.com/questions/6474775/setting-the-mysql-root-user-password-on-os-x
+10. https://github.com/orgs/community/discussions/25200
+11. https://github.com/PrefectHQ/prefect/blob/main/.github/workflows/integration-tests.yaml
+12. https://github.com/github/gitignore/blob/main/Terraform.gitignore
+13. https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
+
+Assignment04:
+
+Commands:
+
+References:
+1. https://blog.searce.com/build-machine-images-with-packer-on-google-cloud-platform-b43f77f1acd
+2. https://developer.hashicorp.com/packer/docs/templates
+3. https://cloud.google.com/compute/docs/images
+4. https://developer.hashicorp.com/packer/docs/templates/hcl_templates/blocks/build/provisioner
+5. https://developer.hashicorp.com/packer/docs/templates/hcl_templates/syntax
+6. https://developer.hashicorp.com/packer/docs/templates/hcl_templates/expressions
+7. https://devopscube.com/packer-tutorial-for-beginners/
+8. https://deserie.hashnode.dev/build-your-own-gcp-vm-image-using-hashicorps-packer
+9. https://cloud.google.com/compute/docs/regions-zones
+10. https://developer.hashicorp.com/packer/integrations/hashicorp/googlecompute
+11. https://developer.hashicorp.com/packer/docs/commands/init
+12. https://developer.hashicorp.com/packer/guides/hcl/variables
+13. https://discuss.hashicorp.com/t/getting-this-packer-errors-when-assigning-variable-values-in-source-block/27546
+14. https://developer.hashicorp.com/packer/guides/hcl/variables
+15. https://stackoverflow.com/questions/42043611/could-not-load-the-default-credentials-node-js-google-compute-engine-tutorial
+16. https://github.com/hashicorp/packer/issues/5735
+17. https://learn.boltops.com/courses/cool-tips/lessons/google-recreating-the-default-network
+18. https://stackoverflow.com/questions/24270733/automate-mysql-secure-installation-with-echo-command-via-a-shell-script
+19. https://gist.github.com/Mins/4602864
+20. https://www.youtube.com/watch?v=xM1GeLhsMEA
+21. https://developer.hashicorp.com/packer/docs/provisioners/shell#script
+22. https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-centos-8
+23. https://github.com/marketplace/actions/set-up-gcloud-cloud-sdk-environment#Authorization
+24. https://github.com/google-github-actions/auth?tab=readme-ov-file#sake
+25. https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address
+26. https://github.com/hashicorp/terraform-provider-google/issues/5027
+27. https://developer.hashicorp.com/packer/docs/provisioners/file
+28. https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall
+29. https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance
+30. https://github.com/marketplace/actions/set-up-gcloud-cloud-sdk-environment#service-account-key-json
+31. https://github.com/marketplace/actions/set-up-gcloud-cloud-sdk-environment#service-account-key-json
+32. https://github.com/hashicorp/packer-plugin-googlecompute/blob/main/docs/README.md#running-on-google-cloud
+33. https://github.com/marketplace/actions/google-cloud-platform-gcp-cli-gcloud
+34. https://www.youtube.com/watch?v=lSumUuZT_B8
+35. https://medium.com/@samunyi90/how-to-enable-and-disable-mysql-service-on-ubuntu-20-04-66bb4dc29b04
