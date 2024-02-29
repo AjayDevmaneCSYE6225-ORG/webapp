@@ -20,7 +20,7 @@ build {
   sources = ["googlecompute.centos_packer_build"]
   provisioner "shell" {
     scripts = [
-      "packer/mysql_install.sh",
+#      "packer/mysql_install.sh",
       "packer/node_install.sh",
       "packer/unzip_install.sh"
     ]
@@ -36,10 +36,10 @@ build {
     destination = "/tmp/webapp.zip"
   }
 
-  provisioner "file" {
-    source      = "/home/runner/work/webapp/webapp/.env"
-    destination = "/tmp/.env"
-  }
+#  provisioner "file" {
+#    source      = "/home/runner/work/webapp/webapp/.env"
+#    destination = "/tmp/.env"
+#  }
 
 
   provisioner "shell" {

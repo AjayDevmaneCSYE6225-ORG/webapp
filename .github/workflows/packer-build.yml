@@ -20,15 +20,15 @@ jobs:
           zip -r webapp.zip .
           echo $(pwd)
 
-      - name: create .env
-        run: |
-          touch .env
-          echo "PORT=3000" >> .env
-          echo "DB_NAME=csye6225" >> .env
-          echo "DB_USERNAME=root" >> .env
-          echo "DB_PASSWORD=Hello@123" >> .env
-          echo "DB_HOST=localhost" >> .env
-          echo $(pwd)
+#      - name: create .env
+#        run: |
+#          touch .env
+#          echo "PORT=3000" >> .env
+#          echo "DB_NAME=csye6225" >> .env
+#          echo "DB_USERNAME=root" >> .env
+#          echo "DB_PASSWORD=Hello@123" >> .env
+#          echo "DB_HOST=localhost" >> .env
+#          echo $(pwd)
 
       - name: Install Packer
         run: |
