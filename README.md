@@ -172,4 +172,17 @@ References:
 33. https://github.com/marketplace/actions/google-cloud-platform-gcp-cli-gcloud
 34. https://www.youtube.com/watch?v=lSumUuZT_B8
 35. https://medium.com/@samunyi90/how-to-enable-and-disable-mysql-service-on-ubuntu-20-04-66bb4dc29b04
-36. 
+
+Assignment05:
+
+Commands:
+
+References:
+1. https://github.com/terraform-google-modules/terraform-google-network/blob/v9.0.0/examples/private_service_connect_google_apis/main.tf
+2. https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_user
+3. https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database
+4. https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password
+5. https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance#attributes-reference
+6. https://cloud.google.com/vpc/docs/configure-private-services-access
+7. https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts
+8. https://medium.com/google-cloud/solution-not-able-to-connect-to-a-private-cloud-sql-instance-from-a-private-data-fusion-instance-7c01e8e4aa4
