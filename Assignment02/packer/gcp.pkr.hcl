@@ -12,6 +12,7 @@ source "googlecompute" "centos_packer_build" {
   source_image_family = var.source_image_family
   ssh_username        = var.ssh_username
   zone                = var.gcp_zone
+  service_account_email = "832118508210-compute@developer.gserviceaccount.com"
   image_name          = "my-custom-image"
 }
 
