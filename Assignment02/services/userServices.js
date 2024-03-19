@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const {encryptPassword} = require("../helpers/bcryptPassword");
+const logger = require("../logs");
 // const {authenticate} = require("../helpers/basicAuthHelper");
 
 function validPassword(password){
@@ -16,15 +17,18 @@ async function createUser(request, response) {
         console.log(invalidFields);
 
         if (invalidFields.length > 0) {
+            logger.error(`invalid field updation`);
             return {code:400,msg:{msg:"invalid field updation"}};
         }
 
         const existingUser=await User.findOne({where:{username:request.body.username}});
         if(existingUser){
+            logger.error(`user exists`);
             return {code:400,msg:{msg:"user exists"}}
         }
 
         if(!(validPassword(request.body.password))){
+            logger.error(`invalid password`);
             return {code:400,msg:{msg:"invalid password"}};
         }
 
@@ -54,6 +58,7 @@ async function createUser(request, response) {
         // console.log(createdBody);
 
         console.log("user created!");
+        logger.info(`user created`);
         return {code:201,msg:displayedBody};
     } catch (error) {
         throw error;
@@ -71,6 +76,7 @@ async function updateUser(request,user){
     const invalidFields = Object.keys(request.body).filter(field => !allowedAttributes.includes(field));
     console.log(invalidFields);
     if (invalidFields.length > 0) {
+        logger.error(`invalid field updation`);
         return {code:400,msg:{msg:"invalid field updation"}};
     }
 
@@ -79,6 +85,7 @@ async function updateUser(request,user){
         // console.log(userInfo.username);
         console.log(Object.keys(request.body).length);
         if(!(validPassword(request.body.password)) || Object.keys(request.body).length===0){
+            logger.error(`invalid updations`);
             return {code:400,msg:{msg:"invalid updations"}};
         }
         // validPassword(request.body.password);
@@ -92,6 +99,7 @@ async function updateUser(request,user){
         });
         await userInfo.save();
         console.log("user updated!");
+        logger.info(`user updated`);
         return {code:204, msg:""};
     }catch(error){
         throw error;

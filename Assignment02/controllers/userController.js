@@ -1,8 +1,11 @@
 const { createUser, getUserInfo, updateUser,} = require("../services/userServices");
 const {authenticateUser} = require("../helpers/basicAuthHelper");
 
+const logger = require('../logs')
+
 async function createUserController(request, response) {
     if(Object.keys(request.query).length){
+        logger.error(`invalid request with params`);
         response.status(400).json({msg:"invalid request with params"});
     }else{
         try {
@@ -11,8 +14,10 @@ async function createUserController(request, response) {
         } catch (error) {
             console.log(error);
             if(error.name==="SequelizeValidationError"){
+                logger.error(`invalid firstname, lastname or username`);
                 response.status(400).json({msg:"invalid firstname, lastname or username"})
             }else{
+                logger.error(`unable to create to user`);
                 response.status(400).json({msg:"unable to create user"});
             }
         }
@@ -22,6 +27,7 @@ async function createUserController(request, response) {
 
 async function getUserInfoController(request,response){
     if(Object.keys(request.query).length || request.headers["content-type"]){
+        logger.error(`invalid request with params or body`);
         response.status(400).json({msg:"invalid request with params or body"});
     }else {
         try {
@@ -36,6 +42,7 @@ async function getUserInfoController(request,response){
             // console.log(authUser)
             // console.log("controller user"+authUser);
             if (authUser) {
+                logger.info(`created found`);
                 response.status(200).json(
                     {
                         "id": authUser.id,
@@ -47,10 +54,12 @@ async function getUserInfoController(request,response){
 
                     });
             } else {
+                logger.error(`unauthorized`);
                 response.status(401).json({msg: "unauthorized"});
             }
 
         } catch (error) {
+            logger.error(`cannot get user from get`);
             response.status(404).json({msg: "cannot get user from get"});
             console.log(error);
         }
@@ -59,6 +68,7 @@ async function getUserInfoController(request,response){
 
 async function putUserInfoController(request,response){
     if(Object.keys(request.query).length){
+        logger.error(`invalid request with params`);
         response.status(400).json({msg:"invalid request with params"});
     }else{
         try{
@@ -68,12 +78,15 @@ async function putUserInfoController(request,response){
                 const result=await updateUser(request,authUser);
                 response.status(result.code).json(result.msg);
             }else{
+                logger.error(`unauthorized`);
                 response.status(401).json({msg:"unauthorized"});
             }
         }catch(error){
             if(error.name==="SequelizeValidationError"){
+                logger.error(`invalid firstname, lastname`);
                 response.status(400).json({msg:"invalid firstname, lastname"})
             }else{
+                logger.error(`unable to create user`);
                 response.status(400).json({msg:"unable to create user"});
             }
 
@@ -83,6 +96,7 @@ async function putUserInfoController(request,response){
 }
 
 async function invalidMethod(request,response){
+    logger.error(`invalid method`);
     response.status(405).send();
 }
 
