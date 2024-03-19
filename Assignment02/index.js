@@ -3,6 +3,11 @@ const express=require('express');
 require('dotenv').config();
 const bodyParser = require('body-parser');
 
+const expressWinston = require('express-winston')
+const { transports, format } = require('winston')
+
+const logger = require('./logs')
+
 // file exports
 const healthzRequest=require('./routers/healthzRouter')
 const db=require('./models/User');
@@ -10,9 +15,13 @@ const userRouter=require('./routers/userRouter')
 const {sequelize} = require("./controllers/healthzController");
 const testConnection = require("./helpers/dbConnection");
 
-
 const app=express();
 const PORT=process.env.PORT;
+
+app.use(expressWinston.logger({
+    winstonInstance: logger,
+    statusLevels: true
+}))
 
 // library use
 app.use(bodyParser.json());
