@@ -49,6 +49,17 @@ build {
     ]
   }
 
+  provisioner "file" {
+    source      = "/Assignment02/config.yml"
+    destination = "/tmp/config.yml"
+  }
+
+  provisioner "shell" {
+    scripts = [
+      "packer/ops.sh"
+    ]
+  }
+
   // provisioner "file" {
   //   source      = "csye6225.service"
   //   destination = "/etc/systemd/system"
