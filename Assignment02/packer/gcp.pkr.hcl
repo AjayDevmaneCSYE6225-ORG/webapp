@@ -37,10 +37,6 @@ build {
       "packer/unzip-service.sh"
     ]
   }
-  provisioner "file" {
-    source      = "./config.yml"
-    destination = "/tmp/config.yml"
-  }
 
   provisioner "shell" {
     scripts = [
