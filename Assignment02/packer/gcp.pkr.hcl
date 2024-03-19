@@ -38,7 +38,7 @@ build {
     ]
   }
   provisioner "file" {
-    source      = "/config.yml"
+    source      = "./config.yml"
     destination = "/tmp/config.yml"
   }
 
