@@ -27,31 +27,25 @@ build {
     ]
   }
 
-  // provisioner "file" {
-  //   source      = ".env"
-  //   destination = "/tmp/cloud"
-  // }
-
   provisioner "file" {
     source      = "/home/runner/work/webapp/webapp/webapp.zip"
     destination = "/tmp/webapp.zip"
   }
-
-  #  provisioner "file" {
-  #    source      = "/home/runner/work/webapp/webapp/.env"
-  #    destination = "/tmp/.env"
-  #  }
-
 
   provisioner "shell" {
     scripts = [
       "packer/unzip-service.sh"
     ]
   }
+  provisioner "file" {
+    source      = "/config.yml"
+    destination = "/tmp/config.yml"
+  }
 
-  // provisioner "file" {
-  //   source      = "csye6225.service"
-  //   destination = "/etc/systemd/system"
-  // }
+  provisioner "shell" {
+    scripts = [
+      "packer/ops.sh"
+    ]
+  }
 
 }
