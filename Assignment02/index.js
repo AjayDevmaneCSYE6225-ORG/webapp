@@ -33,16 +33,16 @@ const schema="csye6225";
 app.use(async (request, response, next) => {
     try {
         await sequelize.authenticate();
-        console.log("successful");
-        logger.info(`successful database connection`);
-        // db.sequelize.sync({force:false}).then(request => {
+        // console.log("successful");
+        // logger.info(`hitting database connection`);
+        // db.sequelize.sync({force:false}).then(request => {s
         //     console.log("table created!")
         // });
         // await sequelize.createSchema(schema);
         // await sequelize.sync({ alter: true })
         next();
     } catch (error) {
-        console.log("database connection failed wefsd");
+        console.log("database connection failed");
         logger.error(`Database connection failed`);
         response.status(503).json({ message: "Database connection failed" });
     }
@@ -73,7 +73,8 @@ app.use(function(request,response){
 
 // listening port
 app.listen(PORT,()=> {
-    console.log(`Server is running at http://localhost:${PORT}`);
+    console.log(`Server is running at http://${DB_HOST}:${PORT}`);
+    logger.debug('application is running')
 });
 
 module.exports=app;
