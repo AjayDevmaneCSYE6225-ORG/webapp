@@ -1,26 +1,22 @@
-const winston = require('winston');
+const { createLogger, format, transports } = require('winston');
 
-const log = winston.format.printf(({ level, message, timestamp }) => {
-    return JSON.stringify({"timestamp" : timestamp,
-              "Severity" : level.toUpperCase(),
-              "Message" : message});
+const log = format.printf(({ level, message, timestamp }) => {
+    return JSON.stringify({
+        timestamp: timestamp,
+        severity: level.toUpperCase(),
+        message: message,
+    });
 });
 
-const webappLog = winston.createLogger({
-
-    level:'debug',
-
-    format: winston.format.combine(
-
-        winston.format.json(),
-        winston.format.timestamp(),
+const webappLog = createLogger({
+    level: 'debug',
+    format: format.combine(
+        format.timestamp(),
         log
-
     ),
-
     transports: [
-        new winston.transports.File({ filename: './webapp.log' }),
-        new winston.transports.Console(),
+        new transports.File({ filename: './webapp.log' }),
+        new transports.Console(),
     ],
 });
 
