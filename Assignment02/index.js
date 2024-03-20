@@ -73,7 +73,7 @@ app.use(function(request,response){
 
 // listening port
 app.listen(PORT,()=> {
-    console.log(`Server is running at http://${DB_HOST}:${PORT}`);
+    console.log(`Server is running at http://${process.env.DB_HOST}:${PORT}`);
     logger.debug('application is running')
 });
 
