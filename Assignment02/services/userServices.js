@@ -23,7 +23,7 @@ async function createUser(request, response) {
 
         const existingUser=await User.findOne({where:{username:request.body.username}});
         if(existingUser){
-            logger.error(`user exists`);
+            logger.error(`user exists : ${request.body.username}`);
             return {code:400,msg:{msg:"user exists"}}
         }
 
@@ -58,7 +58,7 @@ async function createUser(request, response) {
         // console.log(createdBody);
 
         console.log("user created!");
-        logger.info(`user created`);
+        logger.info(`user created : ${displayedBody.username}`);
         return {code:201,msg:displayedBody};
     } catch (error) {
         throw error;
@@ -99,7 +99,7 @@ async function updateUser(request,user){
         });
         await userInfo.save();
         console.log("user updated!");
-        logger.info(`user updated`);
+        logger.info(`updated user : ${user.username}`);
         return {code:204, msg:""};
     }catch(error){
         throw error;

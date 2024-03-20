@@ -5,7 +5,7 @@ const logger = require('../logs')
 
 async function createUserController(request, response) {
     if(Object.keys(request.query).length){
-        logger.error(`invalid request with params`);
+        logger.warn(`Invalid request with params`);
         response.status(400).json({msg:"invalid request with params"});
     }else{
         try {
@@ -27,7 +27,7 @@ async function createUserController(request, response) {
 
 async function getUserInfoController(request,response){
     if(Object.keys(request.query).length || request.headers["content-type"]){
-        logger.error(`invalid request with params or body`);
+        logger.warn(`Invalid request with params or body`);
         response.status(400).json({msg:"invalid request with params or body"});
     }else {
         try {
@@ -42,7 +42,7 @@ async function getUserInfoController(request,response){
             // console.log(authUser)
             // console.log("controller user"+authUser);
             if (authUser) {
-                logger.info(`created found`);
+                logger.debug(`Found user: ${authUser.username}`);
                 response.status(200).json(
                     {
                         "id": authUser.id,
@@ -68,7 +68,7 @@ async function getUserInfoController(request,response){
 
 async function putUserInfoController(request,response){
     if(Object.keys(request.query).length){
-        logger.error(`invalid request with params`);
+        logger.warn(`Invalid request with params`);
         response.status(400).json({msg:"invalid request with params"});
     }else{
         try{

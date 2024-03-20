@@ -23,7 +23,7 @@ const healthCheckRequest=async(request,response)=>{
     response.setHeader("X-Content-Type-Options", "nosniff");
 
     if(request.method!=="GET"){
-        logger.error(`method not allowed`);
+        logger.warn(`Method ${request.method} not allowed`);
         response.status(405).json();
     }else{
         if(Object.keys(request.query).length || Object.keys(request.body).length){
@@ -34,7 +34,7 @@ const healthCheckRequest=async(request,response)=>{
         try{
             await sequelize.authenticate();
             console.log("database connection successful");
-            logger.info(`success in database connection`);
+            logger.debug(`connection is healthy`);
             response.status(200).json();
         }catch(error){
             console.log("database connection failed");
