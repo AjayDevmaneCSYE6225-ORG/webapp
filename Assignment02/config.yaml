@@ -15,8 +15,8 @@ logging:
     fields:
       severity:
         move_from: jsonPayload.severity
-    service:
-      pipelines:
-        default_pipeline:
-          receivers: [my-app-receiver]
-          processors: [my-app-processor,move_severity]
+  service:
+    pipelines:
+      default_pipeline:
+        receivers: [my-app-receiver]
+        processors: [my-app-processor, move_severity]
