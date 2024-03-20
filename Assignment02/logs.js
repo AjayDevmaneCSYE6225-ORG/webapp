@@ -1,23 +1,22 @@
-const { createLogger, format, transports } = require('winston');
+const winston = require('winston');
+const { createLogger, format, transports } = winston;
 
-const log = format.printf(({ level, message, timestamp }) => {
-    return JSON.stringify({
-        timestamp: timestamp,
-        severity: level.toUpperCase(),
-        message: message,
-    });
-});
-
-const webappLog = createLogger({
-    level: 'debug',
+const logger = createLogger({
+    level: 'info',
     format: format.combine(
-        format.timestamp(),
-        log
+        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        format.printf(({ level, message, timestamp }) => {
+            return JSON.stringify({
+                severity: level.toUpperCase(),
+                message,
+                timestamp
+            });
+        })
     ),
     transports: [
-        new transports.File({ filename: './webapp.log' }),
-        // new transports.Console(),
-    ],
-});
+        new winston.transports.File({
+            filename: '/var/log/webapp.log',
+        }),
+    ]});
 
-module.exports = webappLog;
+module.exports = logger;
