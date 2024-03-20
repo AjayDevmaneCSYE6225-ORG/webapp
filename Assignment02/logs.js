@@ -1,9 +1,9 @@
 const winston = require('winston');
 
 const log = winston.format.printf(({ level, message, timestamp }) => {
-    return `{"timestamp" : ${timestamp} 
-              "Severity" : ${level.toUpperCase()}
-              "Message" : ${message}}`;
+    return JSON.stringify({"timestamp" : timestamp,
+              "Severity" : level.toUpperCase(),
+              "Message" : message});
 });
 
 const webappLog = winston.createLogger({
