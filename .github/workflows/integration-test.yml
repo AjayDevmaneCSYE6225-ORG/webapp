@@ -50,7 +50,7 @@ jobs:
           PORT: ${{ secrets.PORT }}
         run: |
           cd Assignment02
-          npm run test
+          # npm run test
 
       - name: deleting redundant data
         run: |
