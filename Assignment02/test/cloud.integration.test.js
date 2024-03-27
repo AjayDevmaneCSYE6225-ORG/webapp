@@ -1,3 +1,6 @@
+const app = require('../index');
+// const request=require('supertest');
+// Use `supertest` consistently
 const request = require('supertest')(app);
 const { userData, updateUserData } = require('./userData');
 
