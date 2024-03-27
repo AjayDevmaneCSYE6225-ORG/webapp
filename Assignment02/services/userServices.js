@@ -1,12 +1,23 @@
 const User = require("../models/User");
 const {encryptPassword} = require("../helpers/bcryptPassword");
 const logger = require("../logs");
-// const {authenticate} = require("../helpers/basicAuthHelper");
 
 function validPassword(password){
     const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/;
     return passwordRegex.test(password);
 }
+
+// console.log(process.env.NODE_ENV);
+
+const { PubSub } = require('@google-cloud/pubsub');
+
+// let pubSubClient;
+
+// if(process.env.NODE_ENV != "test" ){
+
+const pubSubClient = new PubSub({ projectId: 'csye6225-414121' });
+
+// }
 
 async function createUser(request, response) {
     try {
@@ -56,9 +67,26 @@ async function createUser(request, response) {
         }
 
         // console.log(createdBody);
+        // publishing to pub/sub
+        const topicName = 'verify_email';
+        const message = {
+            id: createdBody.dataValues.id,
+            timestamp: currDateTime.toISOString()
+        };
+
+        const dataBuffer = Buffer.from(JSON.stringify(message));
+
+        // if(process.env.NODE_ENV != "test" ){
+
+        await pubSubClient.topic(topicName).publish(dataBuffer);
+
+        // }
 
         console.log("user created!");
         logger.info(`user created : ${displayedBody.username}`);
+        // await publishMessage({
+        //     email: displayedBody.username,
+        // });
         return {code:201,msg:displayedBody};
     } catch (error) {
         throw error;
@@ -106,8 +134,41 @@ async function updateUser(request,user){
     }
 }
 
+async function verifyUser(request, response) {
+    try{
+        console.log("123")
+        console.log(request.query)
+        const { token, timestamp } = request.query; 
+        console.log(token+timestamp)
+        const user = await User.findOne({ where: { id:token } });
+        console.log(user);
+      
+        if (!user) {
+            return {code:400,msg:{msg:"no user"}};
+        }
+      
+        const currentTime = new Date();
+        const sentTime = new Date(timestamp); 
+        const diff = (currentTime - sentTime) / 1000 / 60;
+
+        // User.linkSentTime=sentTime;
+      
+        if (diff > 2) {
+            return {code:400,msg:{msg:"link expired"}};
+        }
+
+        console.log("last step")
+      
+        return {code:200,msg:{msg:"user verified succesfully"}};
+
+    }catch(error){
+        throw error;
+    }
+  }
+
 module.exports = {
     createUser,
     getUserInfo,
-    updateUser
+    updateUser,
+    verifyUser
 };

@@ -50,6 +50,18 @@ const User=sequelize.define("User", {
         type:Sequelize.DATE,
         defaultValue:Sequelize.NOW,
         allowNull:false
+    },
+    isVerified: {
+        type: DataTypes.BOOLEAN,
+        readOnly: true
+    },
+    linkSentTime:{
+        type: DataTypes.DATE,
+        readOnly: true
+    },
+    linkClickTime: {
+        type: DataTypes.DATE,
+        readOnly: true
     }
 },
 {

@@ -1,4 +1,4 @@
-const { createUser, getUserInfo, updateUser,} = require("../services/userServices");
+const { createUser, getUserInfo, updateUser, verifyUser} = require("../services/userServices");
 const {authenticateUser} = require("../helpers/basicAuthHelper");
 
 const logger = require('../logs')
@@ -72,7 +72,6 @@ async function putUserInfoController(request,response){
         response.status(400).json({msg:"invalid request with params"});
     }else{
         try{
-            // console.log("this is put controller");
             const authUser=await authenticateUser(request,response);
             if(authUser){
                 const result=await updateUser(request,authUser);
@@ -95,6 +94,19 @@ async function putUserInfoController(request,response){
 
 }
 
+async function verifyUserController(request, response) {
+    try{
+        console.log("this is time")
+        console.log(request.query)
+        result=await verifyUser(request,response);
+        console.log(result);
+        response.status(result.code).json(result.msg);
+    }catch(error){
+        console.log("this is error block")
+        response.status(400).json({msg:"unauthorized"});
+    }
+  }
+
 async function invalidMethod(request,response){
     logger.error(`invalid method`);
     response.status(405).send();
@@ -106,5 +118,6 @@ module.exports = {
     createUserController,
     getUserInfoController,
     putUserInfoController,
-    invalidMethod
+    invalidMethod,
+    verifyUserController
 };
