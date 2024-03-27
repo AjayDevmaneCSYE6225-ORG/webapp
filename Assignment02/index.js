@@ -60,7 +60,6 @@ try{
     console.log("database not connected");
 }
 
-
 // routers
 app.use("/healthz",healthzRequest);
 app.use("/v1/user",userRouter);
@@ -77,4 +76,6 @@ app.listen(PORT,()=> {
     logger.debug('application is running')
 });
 
-module.exports=app;
+module.exports={
+    app,
+};
