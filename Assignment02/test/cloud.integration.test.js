@@ -1,16 +1,13 @@
-const supertest = require('supertest');
-const app = require('../index');
-const request=require('supertest');
-const {userData, updateUserData}=require('./userData')
+const request = require('supertest')(app);
+const { userData, updateUserData } = require('./userData');
 
 const dotenv = require('dotenv');
-dotenv.config()
+dotenv.config();
 
-//healthz
+// Healthz
 describe('healthz endpoint test', () => {
-
     it('healthz-connection success', (done) => {
-        request(app).get("/healthz")
+        request.get("/healthz")
             .expect(200)
             .end(function(err, res) {
                 if (err) {
@@ -19,13 +16,12 @@ describe('healthz endpoint test', () => {
                 done();
             });
     });
-
 });
 
-// create user
+// Create user
 describe("create user", () => {
     it("create user successful", (done) => {
-        request(app)
+        request
             .post("/v1/user")
             .send(userData)
             .expect(201)
@@ -33,19 +29,16 @@ describe("create user", () => {
                 if (err) {
                     return done(err);
                 }
-
                 done();
             });
     });
 });
 
-// get the user
+// Get user
 describe('get user endpoint test', () => {
-
     it('get user success', (done) => {
-        request(app).get("/v1/user/self")
-            // .set('Authorization', 'Basic ' + Buffer.from('username:password').toString('base64'))
-            .auth(userData.username,userData.password)
+        request.get("/v1/user/self")
+            .auth(userData.username, userData.password)
             .expect(200)
             .end(function(err, res) {
                 if (err) {
@@ -54,16 +47,13 @@ describe('get user endpoint test', () => {
                 done();
             });
     });
-
 });
 
-//update user
+// Update user
 describe('update user endpoint test', () => {
-
     it('put user success', (done) => {
-        request(app).put("/v1/user/self")
-            // .set('Authorization', 'Basic ' + Buffer.from('username:password').toString('base64'))
-            .auth(userData.username,userData.password)
+        request.put("/v1/user/self")
+            .auth(userData.username, userData.password)
             .send(updateUserData)
             .expect(204)
             .end(function(err, res) {
@@ -73,15 +63,13 @@ describe('update user endpoint test', () => {
                 done();
             });
     });
-
 });
 
-//get user
+// Get user again
 describe('get user endpoint test', () => {
-
     it('get user success', (done) => {
-        request(app).get("/v1/user/self")
-            .auth(userData.username,updateUserData.password)
+        request.get("/v1/user/self")
+            .auth(userData.username, updateUserData.password) // Update password here if needed
             .expect(200)
             .end(function(err, res) {
                 if (err) {
@@ -90,5 +78,4 @@ describe('get user endpoint test', () => {
                 done();
             });
     });
-
 });
