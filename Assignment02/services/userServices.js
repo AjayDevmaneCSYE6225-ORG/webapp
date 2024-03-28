@@ -157,7 +157,7 @@ async function verifyUser(token) {
         }
 
         user.linkClickTime=currentTime;
-        user.isVerfied=true;
+        user.isVerified=true;
 
         await user.save();
 
