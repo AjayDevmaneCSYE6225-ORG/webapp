@@ -99,7 +99,7 @@ async function verifyUserController(request, response) {
         console.log("this is time")
         console.log(request.query)
         const reqToken=request.query.token;
-        result=await verifyUser(token);
+        result=await verifyUser(reqToken);
         if(!result){
             return response.status(400).json({msg:"link has been expired"})
         }
