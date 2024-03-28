@@ -19,6 +19,8 @@ async function authenticateUser(request,response){
         if(!user){
             // console.log("!user");
             return null;
+        }else if(!user.isVerified){
+            return null;
         }else if(!(await bcrypt.compare(retrievedPassword,user.password))){
             // console.log(await bcrypt.compare(retrievedPassword,user.password));
             // console.log("!password");
