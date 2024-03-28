@@ -98,9 +98,12 @@ async function verifyUserController(request, response) {
     try{
         console.log("this is time")
         console.log(request.query)
-        result=await verifyUser(request,response);
-        console.log(result);
-        response.status(result.code).json(result.msg);
+        const reqToken=request.query.token;
+        result=await verifyUser(token);
+        if(!result){
+            return response.status(400).json({msg:"link has been expired"})
+        }
+        return response.status(200).json({msg:"email has been verified successfully"})
     }catch(error){
         console.log("this is error block")
         response.status(400).json({msg:"unauthorized"});

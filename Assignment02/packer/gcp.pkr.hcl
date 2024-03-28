@@ -13,7 +13,7 @@ source "googlecompute" "centos_packer_build" {
   ssh_username          = var.ssh_username
   zone                  = var.gcp_zone
   service_account_email = "832118508210-compute@developer.gserviceaccount.com"
-  image_name            = "my-custom-image-2"
+  image_name            = "my-custom-image"
 }
 
 

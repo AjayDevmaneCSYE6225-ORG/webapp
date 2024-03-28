@@ -52,7 +52,7 @@ async function createUser(request, response) {
             password: request.body.password,
             username: request.body.username,
             accountCreated: currDateTime,
-            accountUpdated: currDateTime
+            accountUpdated: currDateTime,
         });
 
         console.log(createdBody.dataValues.firstName);
@@ -71,14 +71,15 @@ async function createUser(request, response) {
         const topicName = 'verify_email';
         const message = {
             id: createdBody.dataValues.id,
-            timestamp: currDateTime.toISOString()
+            username:createdBody.dataValues.username,
         };
 
         const dataBuffer = Buffer.from(JSON.stringify(message));
 
         // if(process.env.NODE_ENV != "test" ){
 
-        await pubSubClient.topic(topicName).publish(dataBuffer);
+        await pubSubClient.topic(topicName).publishMessage({data:dataBuffer});
+        console.log("pubsub message sent")
 
         // }
 
@@ -134,34 +135,36 @@ async function updateUser(request,user){
     }
 }
 
-async function verifyUser(request, response) {
+async function verifyUser(token) {
     try{
         console.log("123")
-        console.log(request.query)
-        const { token, timestamp } = request.query; 
-        console.log(token+timestamp)
+        console.log(token+"this is inside the verify user function")
+
         const user = await User.findOne({ where: { id:token } });
         console.log(user);
       
         if (!user) {
-            return {code:400,msg:{msg:"no user"}};
+            return false;
         }
       
         const currentTime = new Date();
-        const sentTime = new Date(timestamp); 
-        const diff = (currentTime - sentTime) / 1000 / 60;
+        const sentTime = new Date(user.linkSentTime);
 
-        // User.linkSentTime=sentTime;
+        const diff = (currentTime.getTime() - sentTime.getTime()) / (1000 * 60);
       
         if (diff > 2) {
-            return {code:400,msg:{msg:"link expired"}};
+            return false;
         }
 
-        console.log("last step")
-      
-        return {code:200,msg:{msg:"user verified succesfully"}};
+        user.linkClickTime=currentTime;
+        user.isVerfied=true;
 
+        await user.save();
+
+        return true;
+     
     }catch(error){
+        console.log(error);
         throw error;
     }
   }
