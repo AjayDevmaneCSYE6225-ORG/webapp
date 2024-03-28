@@ -53,15 +53,14 @@ const User=sequelize.define("User", {
     },
     isVerified: {
         type: DataTypes.BOOLEAN,
-        readOnly: true
+        allowNull: false,
+        defaultValue: false,
     },
     linkSentTime:{
         type: DataTypes.DATE,
-        readOnly: true
     },
     linkClickTime: {
         type: DataTypes.DATE,
-        readOnly: true
     }
 },
 {
