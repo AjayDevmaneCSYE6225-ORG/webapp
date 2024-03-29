@@ -70,12 +70,11 @@ app.use(function(request,response){
     response.status(404).json({msg:"invalid url"});
 });
 
+module.exports=app;
+
 // listening port
 app.listen(PORT,()=> {
     console.log(`Server is running at http://${process.env.DB_HOST}:${PORT}`);
     logger.debug('application is running')
 });
 
-module.exports={
-    app,
-};

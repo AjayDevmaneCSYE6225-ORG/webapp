@@ -9,15 +9,13 @@ function validPassword(password){
 
 // console.log(process.env.NODE_ENV);
 
+if(process.env.NODE_ENV != "test" ){
+
 const { PubSub } = require('@google-cloud/pubsub');
-
-// let pubSubClient;
-
-// if(process.env.NODE_ENV != "test" ){
 
 const pubSubClient = new PubSub({ projectId: 'csye6225-414121' });
 
-// }
+}
 
 async function createUser(request, response) {
     try {
@@ -45,7 +43,8 @@ async function createUser(request, response) {
 
         request.body.password=await encryptPassword(request.body.password);
 
-        const currDateTime=new Date();
+        const currDateTime=new Date().toUTCString();
+        
         const createdBody=await User.create({
             firstName:request.body.firstName,
             lastName: request.body.lastName,
@@ -68,20 +67,26 @@ async function createUser(request, response) {
 
         // console.log(createdBody);
         // publishing to pub/sub
+
+        if(process.env.NODE_ENV != "test" ){
+
+        // const tempUser = await User.findOne({ where: { id:createdBody.dataValues.id } });
+
+        // console.log(tempUser.dataValues.accountCreated)
+
         const topicName = 'verify_email';
         const message = {
             id: createdBody.dataValues.id,
             username:createdBody.dataValues.username,
+            linkSentTime: new Date().toISOString().slice(0, 19).replace("T", " ")
         };
 
         const dataBuffer = Buffer.from(JSON.stringify(message));
 
-        // if(process.env.NODE_ENV != "test" ){
-
         await pubSubClient.topic(topicName).publishMessage({data:dataBuffer});
         console.log("pubsub message sent")
 
-        // }
+        }
 
         console.log("user created!");
         logger.info(`user created : ${displayedBody.username}`);
@@ -147,19 +152,19 @@ async function verifyUser(token) {
             return false;
         }
       
-        const currentTime = new Date();
+        const currentTime = new Date().toISOString().slice(0, 19).replace("T", " ");
         const sentTime = new Date(user.linkSentTime);
 
-        const diff = (currentTime.getTime() - sentTime.getTime()) / (1000 * 60);
+        const diff = (sentTime - currentTime) / (1000 * 60);
       
         if (diff > 2) {
             return false;
         }
 
-        user.linkClickTime=currentTime;
-        user.isVerified=true;
+        // user.linkClickTime=currentTime;
+        // user.isVerified=true;
 
-        await user.save();
+        await User.update({linkClickTime:currentTime,isVerified:true},{where:{id:token}});
 
         return true;
      
