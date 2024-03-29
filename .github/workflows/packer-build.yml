@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [closed]
     branches:
-          - main
+          - ass05_123
 
 jobs:
   packer-check:
