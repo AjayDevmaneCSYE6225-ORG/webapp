@@ -3,7 +3,7 @@ name: packervalidation
 on:
   pull_request:
     branches:
-      - main
+      - ass05_123
   workflow_dispatch :
 
 jobs:
