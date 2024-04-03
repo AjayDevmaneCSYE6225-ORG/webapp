@@ -53,7 +53,10 @@ async function getUserInfoController(request,response){
                         "accountUpdated": authUser.accountUpdated
 
                     });
-            } else {
+            } else if(authUser==false){
+                response.status(403).json({msg: "forbidden"})
+            }
+            else {
                 logger.error(`unauthorized`);
                 response.status(401).json({msg: "unauthorized"});
             }
@@ -73,10 +76,15 @@ async function putUserInfoController(request,response){
     }else{
         try{
             const authUser=await authenticateUser(request,response);
-            if(authUser){
+            console.log("this is authUser: "+authUser)
+            if(authUser==false){
+                response.status(403).json({msg: "forbidden"})
+            }
+            else if(authUser){
                 const result=await updateUser(request,authUser);
                 response.status(result.code).json(result.msg);
-            }else{
+            }
+            else{
                 logger.error(`unauthorized`);
                 response.status(401).json({msg:"unauthorized"});
             }
