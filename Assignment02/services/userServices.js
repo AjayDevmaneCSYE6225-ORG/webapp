@@ -147,19 +147,19 @@ async function verifyUser(token) {
             return false;
         }
       
-        const currentTime = new Date();
+        const currentTime = new Date().toISOString().slice(0, 19).replace("T", " ");
         const sentTime = new Date(user.linkSentTime);
 
-        const diff = (currentTime.getTime() - sentTime.getTime()) / (1000 * 60);
+        const diff = (sentTime - currentTime) / (1000 * 60);
       
         if (diff > 2) {
             return false;
         }
 
-        user.linkClickTime=currentTime;
-        user.isVerified=true;
+        // user.linkClickTime=currentTime;
+        // user.isVerified=true;
 
-        await user.save();
+        await User.update({linkClickTime:currentTime,isVerified:true},{where:{id:token}});
 
         return true;
      
