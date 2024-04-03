@@ -15,7 +15,7 @@ const { PubSub } = require('@google-cloud/pubsub');
 
 // if(process.env.NODE_ENV != "test" ){
 
-const pubSubClient = new PubSub({ projectId: 'csye6225-414121' });
+var pubSubClient = new PubSub({ projectId: 'csye6225-414121' });
 
 // }
 

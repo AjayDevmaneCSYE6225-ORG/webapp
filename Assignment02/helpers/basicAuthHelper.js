@@ -15,12 +15,16 @@ async function authenticateUser(request,response){
 
         const user=await getUserInfo(retrievedUsername);
         // console.log(user);
+        console.log(user)
+        console.log(user.isVerified)
 
         if(!user){
             // console.log("!user");
+            console.log("this is first if block")
             return null;
         }else if(!user.isVerified){
-            return null;
+            console.log("this is second if")
+            return user.isVerified;
         }else if(!(await bcrypt.compare(retrievedPassword,user.password))){
             // console.log(await bcrypt.compare(retrievedPassword,user.password));
             // console.log("!password");
@@ -30,6 +34,7 @@ async function authenticateUser(request,response){
             return user;
         }
     }catch(error){
+        console.log("this is inside error of authenticateuser")
         throw error;
     }
 
