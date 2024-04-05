@@ -72,6 +72,7 @@ async function createUser(request, response) {
         const message = {
             id: createdBody.dataValues.id,
             username:createdBody.dataValues.username,
+            linkSentTime: new Date().toISOString().slice(0, 19).replace("T", " ")
         };
 
         const dataBuffer = Buffer.from(JSON.stringify(message));
