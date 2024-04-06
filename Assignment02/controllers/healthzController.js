@@ -12,7 +12,6 @@ const sequelize=new Sequelize(
     {
         dialect:'mysql',
         host: process.env.DB_HOST,
-        timezone:'-05:00',
     }
 );
 
