@@ -7,18 +7,6 @@ function validPassword(password){
     return passwordRegex.test(password);
 }
 
-// console.log(process.env.NODE_ENV);
-
-// const { PubSub } = require('@google-cloud/pubsub');
-
-// // let pubSubClient;
-
-// // if(process.env.NODE_ENV != "test" ){
-
-// var pubSubClient = new PubSub({ projectId: 'csye6225-414121' });
-
-// // }
-
 if(process.env.NODE_ENV != "test" ){
 
     const { PubSub } = require('@google-cloud/pubsub');
