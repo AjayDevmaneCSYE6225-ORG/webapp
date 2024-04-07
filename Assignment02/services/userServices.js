@@ -9,15 +9,23 @@ function validPassword(password){
 
 // console.log(process.env.NODE_ENV);
 
-const { PubSub } = require('@google-cloud/pubsub');
+// const { PubSub } = require('@google-cloud/pubsub');
 
-// let pubSubClient;
+// // let pubSubClient;
 
-// if(process.env.NODE_ENV != "test" ){
+// // if(process.env.NODE_ENV != "test" ){
 
-var pubSubClient = new PubSub({ projectId: 'csye6225-414121' });
+// var pubSubClient = new PubSub({ projectId: 'csye6225-414121' });
 
-// }
+// // }
+
+if(process.env.NODE_ENV != "test" ){
+
+    const { PubSub } = require('@google-cloud/pubsub');
+    
+    const pubSubClient = new PubSub({ projectId: 'csye6225-414121' });
+    
+    }
 
 async function createUser(request, response) {
     try {
@@ -68,6 +76,9 @@ async function createUser(request, response) {
 
         // console.log(createdBody);
         // publishing to pub/sub
+
+        if(process.env.NODE_ENV != "test" ){
+
         const topicName = 'verify_email';
         const message = {
             id: createdBody.dataValues.id,
@@ -82,7 +93,8 @@ async function createUser(request, response) {
         await pubSubClient.topic(topicName).publishMessage({data:dataBuffer});
         console.log("pubsub message sent")
 
-        // }
+        }
+        
 
         console.log("user created!");
         logger.info(`user created : ${displayedBody.username}`);
