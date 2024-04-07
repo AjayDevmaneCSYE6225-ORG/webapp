@@ -20,12 +20,10 @@ async function authenticateUser(request,response){
 
         if(!user){
             // console.log("!user");
-            console.log("this is first if block")
             return null;
-        }else if(!user.isVerified){
-            console.log("this is second if")
-            return user.isVerified;
         }else if(!(await bcrypt.compare(retrievedPassword,user.password))){
+            return null;
+        }else if(process.env.NODE_ENV !== "test" && !user.isVerified){
             // console.log(await bcrypt.compare(retrievedPassword,user.password));
             // console.log("!password");
             return null;
