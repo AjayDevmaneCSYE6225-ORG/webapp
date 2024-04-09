@@ -149,9 +149,9 @@ async function verifyUser(token) {
         }
       
         const currentTime = new Date().toISOString().slice(0, 19).replace("T", " ");
-        const sentTime = new Date(user.linkSentTime);
+        const sentTime = new Date(user.linkSentTime).toISOString().slice(0, 19).replace("T", " ");
 
-        const diff = (sentTime - currentTime) / (1000 * 60);
+        const diff = (new Date(currentTime) - new Date(sentTime)) / (1000 * 60);
       
         if (diff > 2) {
             return false;
