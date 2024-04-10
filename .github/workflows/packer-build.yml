@@ -70,8 +70,7 @@ jobs:
       - name: Update Managed Instance Group
         run: |
           gcloud compute instance-groups managed set-instance-template webapp-instance-group \
-          --project="csye6225-414121" \
-          --template="csye-instance-template2" \
+          --template="projects/csye6225-414121/global/instanceTemplates/csye-instance-template2" \
           --region=us-west2 \
 
   
