@@ -72,7 +72,7 @@ jobs:
           gcloud compute instance-groups managed set-instance-template webapp-instance-group \
           --project="csye6225-414121" \
           --zone="us-west2-a" \
-          --template=csye-instance-template2
+          --template="csye-instance-template2"
   
 
       # Issue command to start a basic rolling update
