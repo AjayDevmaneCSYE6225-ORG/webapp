@@ -39,7 +39,7 @@ jobs:
       # Create a new Instance Template version
       - name: Create Instance Template version
         run: |
-          gcloud compute instance-templates create csye-instance-template \
+          gcloud compute instance-templates create csye-instance-template2 \
             --project="csye6225-414121" \
             --image="my-final-custom-image" \
             --machine-type=n1-standard-1 \
