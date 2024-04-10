@@ -70,7 +70,7 @@ jobs:
             --tags=webapp \
             --instance-template-region=us-west2 \
             --scopes=logging-write,monitoring-write,cloud-platform,pubsub \
-            --service-account="service-account-iam-id@csye6225-414121.iam.gserviceaccount.com" \
+            --service-account="service-832118508210@compute-system.iam.gserviceaccount.com" \
             --metadata=startup-script="#!/bin/bash
             sudo bash -c 'cat <<EOF > /opt/unzippedWebapp/Assignment02/.env
             DB_USERNAME=webapp
