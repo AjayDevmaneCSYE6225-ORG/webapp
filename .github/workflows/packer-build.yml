@@ -69,9 +69,7 @@ jobs:
       # Update the managed instance group to use the new template
       - name: Update Managed Instance Group
         run: |
-          gcloud compute instance-groups managed set-instance-template webapp-instance-group \
-          --template="projects/csye6225-414121/global/instanceTemplates/csye-instance-template2" \
-          --region=us-west2 \
+          gcloud compute instance-groups managed set-instance-template webapp-instance-group --region=us-west2 --template=csye-instance-template2 --project=csye6225-414121
 
   
 
