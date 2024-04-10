@@ -36,10 +36,10 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_KEY2 }}
 
-      # - name: building packer image
-      #   run: |
-      #       cd Assignment02
-      #       packer build packer
+      - name: building packer image
+        run: |
+            cd Assignment02
+            packer build packer
 
       - name: get gcp image id
         id: image_id_get
