@@ -84,7 +84,7 @@ jobs:
           while true; do
             STATUS=$(gcloud compute instance-groups managed describe webapp-instance-group \
               --project="csye6225-414121" \
-              --zone="us-west2-a" \
+              --region="us-west2" \
               --format="value(currentActions)" \
               | grep -c 'none')
             if [ "$STATUS" == "1" ]; then
