@@ -86,14 +86,14 @@ jobs:
       # Update the managed instance group to use the new template
       - name: Update Managed Instance Group
         run: |
-          gcloud compute instance-groups managed set-instance-template webapp-instance-group --region=us-west2 --template=projects/csye6225-414121/regions/us-west2/instanceTemplates/$TEMPLATE --project=csye6225-414121
+          gcloud compute instance-groups managed set-instance-template webapp-instance-group --region=us-west2 --template=projects/csye6225-414121/regions/us-west2/instanceTemplates/csye-instance-template-${{ env.VERSION_NUM }} --project=csye6225-414121
 
   
 
       # Issue command to start a basic rolling update
       - name: Start Rolling Update
         run: |
-          gcloud compute instance-groups managed rolling-action start-update webapp-instance-group --version=template=projects/csye6225-414121/regions/us-west2/instanceTemplates/$TEMPLATE --max-surge=5 --region=us-west2 --project=csye6225-414121
+          gcloud compute instance-groups managed rolling-action start-update webapp-instance-group --version=template=projects/csye6225-414121/regions/us-west2/instanceTemplates/csye-instance-template-${{ env.VERSION_NUM }} --max-surge=5 --region=us-west2 --project=csye6225-414121
 
       # Wait for the managed instance group to finish updating
       - name: Wait for Instance Group Update
