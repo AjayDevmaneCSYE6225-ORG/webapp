@@ -76,14 +76,7 @@ jobs:
       # Issue command to start a basic rolling update
       - name: Start Rolling Update
         run: |
-          gcloud compute instance-groups managed rolling-action start-update webapp-instance-group \
-            --project="csye6225-414121" \
-            --zone="us-west2-a" \
-            --version=csye-instance-template2 \
-            --type=proactive \
-            --max-surge=1 \
-            --max-unavailable=0 \
-            --min-ready=300s
+          gcloud compute instance-groups managed rolling-action start-update webapp-instance-group --version=template="csye-instance-template2" --max-surge=5 --region=us-west2 --project=csye6225-414121
 
       # Wait for the managed instance group to finish updating
       - name: Wait for Instance Group Update
