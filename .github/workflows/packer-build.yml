@@ -69,7 +69,7 @@ jobs:
             --network-tier=PREMIUM \
             --tags=webapp \
             --instance-template-region=us-west2 \
-            --scopes=logging-write,monitoring-write,cloud-platform,pubsub,cloudkms \
+            --scopes=logging-write,monitoring-write,cloud-platform,pubsub \
             --service-account="service-account-iam-id1@csye6225-414121.iam.gserviceaccount.com" \
             --metadata=startup-script="#!/bin/bash
             sudo bash -c 'cat <<EOF > /opt/unzippedWebapp/Assignment02/.env
