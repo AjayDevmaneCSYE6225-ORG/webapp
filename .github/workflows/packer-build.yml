@@ -48,7 +48,7 @@ jobs:
             --boot-disk-type=pd-balanced \
             --boot-disk-kms-key=projects/csye6225-414121/locations/global/keyRings/vm_key_3/cryptoKeys/vm_key_3 \
             --network="csye-vpc" \
-            --subnet=webapp_subnet \
+            --subnet="csye-webapp-subnet" \
             --network-tier=PREMIUM \
             --tags=webapp \
             --metadata=startup-script="#!/bin/bash
