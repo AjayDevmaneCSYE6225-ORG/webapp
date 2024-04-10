@@ -69,7 +69,13 @@ jobs:
       # Update the managed instance group to use the new template
       - name: Update Managed Instance Group
         run: |
-          gcloud compute instance-groups managed set-instance-template webapp-instance-group --template="https://console.cloud.google.com/compute/instanceTemplates/csye-instance-template2" --region=us-west2
+          gcloud compute instance-groups managed set-instance-template webapp-instance-group --template="csye-instance-template2" --region=us-west2
+          gcloud compute instance-groups managed create webapp-instance-group \
+          --base-instance-name="webapp" \
+          --template="csye-instance-template2" \
+          --region=us-west2 \
+          --zone=us-west2-a \
+
   
 
       # Issue command to start a basic rolling update
