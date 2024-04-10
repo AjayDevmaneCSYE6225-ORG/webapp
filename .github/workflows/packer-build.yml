@@ -37,34 +37,34 @@ jobs:
           credentials_json: ${{ secrets.GCP_KEY2 }}
 
       # Create a new Instance Template version
-      - name: Create Instance Template version
-        run: |
-          gcloud compute instance-templates create csye-instance-template2 \
-            --project="csye6225-414121" \
-            --image="my-final-custom-image" \
-            --machine-type=n1-standard-1 \
-            --region="us-west2" \
-            --boot-disk-size=100 \
-            --boot-disk-type=pd-balanced \
-            --boot-disk-kms-key=projects/csye6225-414121/locations/global/keyRings/vm_key_3/cryptoKeys/vm_key_3 \
-            --network="csye-vpc" \
-            --subnet="csye-webapp-subnet" \
-            --network-tier=PREMIUM \
-            --tags=webapp \
-            --instance-template-region=us-west2 \
-            --scopes=logging-write,monitoring-write,cloud-platform,pubsub \
-            --service-account="service-account-iam-id@csye6225-414121.iam.gserviceaccount.com" \
-            --metadata=startup-script="#!/bin/bash
-            sudo bash -c 'cat <<EOF > /opt/unzippedWebapp/Assignment02/.env
-            DB_USERNAME=webapp
-            DB_NAME=webapp
-            DB_PASSWORD=Hello@123
-            DB_HOST=localhost
-            PORT=3000
-            EOF'
-            sudo chown -R csye6225:csye6225 /opt/unzippedWebapp/Assignment02
-            sudo chmod -R 755 /opt/unzippedWebapp/Assignment02
-            sudo systemctl restart csye6225.service"
+      # - name: Create Instance Template version
+      #   run: |
+      #     gcloud compute instance-templates create csye-instance-template2 \
+      #       --project="csye6225-414121" \
+      #       --image="my-final-custom-image" \
+      #       --machine-type=n1-standard-1 \
+      #       --region="us-west2" \
+      #       --boot-disk-size=100 \
+      #       --boot-disk-type=pd-balanced \
+      #       --boot-disk-kms-key=projects/csye6225-414121/locations/global/keyRings/vm_key_3/cryptoKeys/vm_key_3 \
+      #       --network="csye-vpc" \
+      #       --subnet="csye-webapp-subnet" \
+      #       --network-tier=PREMIUM \
+      #       --tags=webapp \
+      #       --instance-template-region=us-west2 \
+      #       --scopes=logging-write,monitoring-write,cloud-platform,pubsub \
+      #       --service-account="service-account-iam-id@csye6225-414121.iam.gserviceaccount.com" \
+      #       --metadata=startup-script="#!/bin/bash
+      #       sudo bash -c 'cat <<EOF > /opt/unzippedWebapp/Assignment02/.env
+      #       DB_USERNAME=webapp
+      #       DB_NAME=webapp
+      #       DB_PASSWORD=Hello@123
+      #       DB_HOST=localhost
+      #       PORT=3000
+      #       EOF'
+      #       sudo chown -R csye6225:csye6225 /opt/unzippedWebapp/Assignment02
+      #       sudo chmod -R 755 /opt/unzippedWebapp/Assignment02
+      #       sudo systemctl restart csye6225.service"
 
       # Update the managed instance group to use the new template
       - name: Update Managed Instance Group
