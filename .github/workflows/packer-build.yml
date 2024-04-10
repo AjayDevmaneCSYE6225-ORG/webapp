@@ -42,10 +42,10 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_KEY2 }}
 
-      - name: packer build
-        run: |
-          cd Assignment02
-          packer build packer
+      # - name: packer build
+      #   run: |
+      #     cd Assignment02
+      #     packer build packer
 
       - name: GET GCP IMAGE ID
         id: get_image_id
@@ -62,7 +62,7 @@ jobs:
       # Create a new Instance Template version
       - name: Create Instance Template version
         run: |
-          gcloud compute instance-templates create-version csye-instance-template \
+          gcloud compute instance-templates create csye-instance-template \
             --template=csye-instance-template \
             --source-image=projects/csye6225-414121/global/images/my-final-custom-image \
             --machine-type=n1-standard-1 \
