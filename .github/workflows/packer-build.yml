@@ -40,13 +40,14 @@ jobs:
       - name: Create Instance Template version
         run: |
           gcloud compute instance-templates create csye-instance-template \
-            --image=projects/csye6225-414121/global/images/my-final-custom-image \
+            --project="csye6225-414121"
+            --image="my-final-custom-image" \
             --machine-type=n1-standard-1 \
             --boot-disk-size=100 \
             --boot-disk-type=pd-balanced \
             --boot-disk-kms-key=projects/csye6225-414121/locations/global/keyRings/vm_key_3/cryptoKeys/vm_key_3 \
-            --network=projects/csye6225-414121/global/networks/vpc \
-            --subnet=projects/csye6225-414121/regions/us-central1/subnetworks/webapp_subnet \
+            --network="csye-vpc" \
+            --subnet=webapp_subnet \
             --network-tier=PREMIUM \
             --tags=webapp \
             --metadata=startup-script="#!/bin/bash
