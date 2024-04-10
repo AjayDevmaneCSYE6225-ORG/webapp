@@ -51,6 +51,9 @@ jobs:
             --subnet="csye-webapp-subnet" \
             --network-tier=PREMIUM \
             --tags=webapp \
+            --instance-template-region=us-west2 \
+            --scopes=logging-write,monitoring-write,cloud-platform,pubsub \
+            --service-account="832118508210-compute@developer.gserviceaccount.com" \
             --metadata=startup-script="#!/bin/bash
             sudo bash -c 'cat <<EOF > /opt/unzippedWebapp/Assignment02/.env
             DB_USERNAME=webapp
