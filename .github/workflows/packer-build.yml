@@ -78,7 +78,7 @@ jobs:
       # Issue command to start a basic rolling update
       - name: Start Rolling Update
         run: |
-          gcloud compute instance-groups managed rolling-action start-update csye-managed-group2 \
+          gcloud compute instance-groups managed rolling-action start-update webapp-instance-group \
             --project="csye6225-414121" \
             --zone="us-west2-a" \
             --version=csye-instance-template2 \
@@ -91,7 +91,7 @@ jobs:
       - name: Wait for Instance Group Update
         run: |
           while true; do
-            STATUS=$(gcloud compute instance-groups managed describe csye-managed-group \
+            STATUS=$(gcloud compute instance-groups managed describe webapp-instance-group \
               --project="csye6225-414121" \
               --zone="us-west2-a" \
               --format="value(currentActions)" \
