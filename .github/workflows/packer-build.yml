@@ -69,24 +69,38 @@ jobs:
       # Update the managed instance group to use the new template
       - name: Update Managed Instance Group
         run: |
-          gcloud compute instance-groups managed set-instance-template your-managed-instance-group \
-            --template=csye-instance-template \
-            --zone=your-zone
+          gcloud compute instance-groups managed set-instance-template csye-managed-group2 \
+          --project="csye6225-414121" \
+          --zone="us-west2-a" \
+          --template=csye-instance-template2
+  
 
-      # Start a rolling update for the managed instance group
+      # Issue command to start a basic rolling update
       - name: Start Rolling Update
         run: |
-          gcloud compute instance-groups managed rolling-action start-update your-managed-instance-group \
-            --version=csye-instance-template \
-            --zone=your-zone \
-            --type=rolling-update
+          gcloud compute instance-groups managed rolling-action start-update csye-managed-group2 \
+            --project="csye6225-414121" \
+            --zone="us-west2-a" \
+            --version=csye-instance-template2 \
+            --type=proactive \
+            --max-surge=1 \
+            --max-unavailable=0 \
+            --min-ready=300s
 
-      # Wait for the managed instance group update to complete
-      - name: Wait for Managed Instance Group Update
+      # Wait for the managed instance group to finish updating
+      - name: Wait for Instance Group Update
         run: |
-          while [[ $(gcloud compute instance-groups managed describe your-managed-instance-group \
-                    --zone=your-zone --format='value(versions.targetSize)' \
-                    --filter='isStable = true') -lt 100 ]]; do
-            echo "Waiting for managed instance group update to complete..."
-            sleep 10
+          while true; do
+            STATUS=$(gcloud compute instance-groups managed describe csye-managed-group \
+              --project="csye6225-414121" \
+              --zone="us-west2-a" \
+              --format="value(currentActions)" \
+              | grep -c 'none')
+            if [ "$STATUS" == "1" ]; then
+              echo "Instance group update completed."
+              break
+            else
+              echo "Instance group still updating..."
+              sleep 10
+            fi
           done
