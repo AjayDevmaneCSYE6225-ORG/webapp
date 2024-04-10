@@ -1,10 +1,16 @@
 name: packerbuild
 
+# on:
+#   pull_request:
+#     types: [closed]
+#     branches:
+#       - main
+
 on:
   pull_request:
-    types: [closed]
     branches:
       - main
+  workflow_dispatch :
 
 jobs:
   packer-check:
@@ -40,6 +46,18 @@ jobs:
         run: |
           cd Assignment02
           packer build packer
+
+      - name: GET GCP IMAGE ID
+        id: get_image_id
+        run: |
+            cd Assignment02
+            IMAGE_ID=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d ":" -f2)
+            echo "IMAGE_ID=$IMAGE_ID" >> $GITHUB_ENV
+            echo "Built GCP image ID is $IMAGE_ID"
+              
+      - name: Generate version number
+        id: versioning
+        run: echo "VERSION=$(date +%s)" >> $GITHUB_ENV
 
       # Create a new Instance Template version
       - name: Create Instance Template version
