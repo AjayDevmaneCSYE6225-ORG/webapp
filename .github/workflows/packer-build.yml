@@ -64,7 +64,7 @@ jobs:
             --boot-disk-size=100 \
             --boot-disk-type=pd-balanced \
             --boot-disk-device-name="yml-template-instance"
-            --boot-disk-kms-key=projects/csye6225-414121/locations/us-west2/keyRings/my-key-ring-9/cryptoKeys/vm-key-9 \
+            --boot-disk-kms-key=projects/csye6225-414121/locations/us-west2/keyRings/my-key-ring-9 \
             --network="csye-vpc" \
             --subnet="csye-webapp-subnet" \
             --network-tier=PREMIUM \
