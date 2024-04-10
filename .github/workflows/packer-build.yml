@@ -40,7 +40,7 @@ jobs:
       - name: Create Instance Template version
         run: |
           gcloud compute instance-templates create csye-instance-template \
-            --image-instance=projects/csye6225-414121/global/images/my-final-custom-image \
+            --image=projects/csye6225-414121/global/images/my-final-custom-image \
             --machine-type=n1-standard-1 \
             --boot-disk-size=100 \
             --boot-disk-type=pd-balanced \
