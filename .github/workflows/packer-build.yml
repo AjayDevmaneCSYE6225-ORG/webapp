@@ -56,7 +56,7 @@ jobs:
       - name: Create Instance Template version
         run: |
           TEMPLATE="csye-instance-template-${{ env.VERSION_NUM }}"
-          gcloud compute instance-templates create $TEMPLATE \
+          gcloud compute instance-templates create csye-instance-template-${{ env.VERSION_NUM }} \
             --project="csye6225-414121" \
             --image="my-final-custom-image" \
             --machine-type=n1-standard-1 \
