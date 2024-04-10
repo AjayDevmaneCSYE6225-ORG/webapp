@@ -63,7 +63,7 @@ jobs:
             --region="us-west2" \
             --boot-disk-size=20 \
             --boot-disk-type=pd-balanced \
-            --boot-disk-kms-key=projects/csye6225-414121/locations/us-west2/keyRings/my-key-ring-101/cryptoKeys/vm-key-101 \
+            --boot-disk-kms-key=${{ secrets.KMS_KEY }} \
             --network="csye-vpc" \
             --subnet="csye-webapp-subnet" \
             --network-tier=PREMIUM \
@@ -75,8 +75,8 @@ jobs:
             sudo bash -c 'cat <<EOF > /opt/unzippedWebapp/Assignment02/.env
             DB_USERNAME=webapp
             DB_NAME=webapp
-            DB_PASSWORD=7INfiLj5swCMXo0w
-            DB_HOST=10.33.144.2
+            DB_PASSWORD=${{ secrets.GCP_DB_PASSWORD }}
+            DB_HOST=${{ secrets.GCP_HOST }}
             PORT=3000
             EOF'
             sudo chown -R csye6225:csye6225 /opt/unzippedWebapp/Assignment02
