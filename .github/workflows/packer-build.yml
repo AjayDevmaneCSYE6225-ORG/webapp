@@ -63,7 +63,7 @@ jobs:
             --region="us-west2" \
             --boot-disk-size=100 \
             --boot-disk-type=pd-balanced \
-            --boot-disk-kms-key=projects/csye6225-414121/locations/global/keyRings/vm_key_3/cryptoKeys/vm-key-8 \
+            --boot-disk-kms-key=projects/csye6225-414121/locations/global/keyRings/vm_key_3/cryptoKeys/vm-key-9 \
             --network="csye-vpc" \
             --subnet="csye-webapp-subnet" \
             --network-tier=PREMIUM \
