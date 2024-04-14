@@ -59,74 +59,74 @@ jobs:
             cd Assignment02
             packer build packer
 
-      - name: get gcp image id
-        id: image_id_get
-        run: |
-            cd Assignment02
-            IMAGE_ID=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d ":" -f2)
-            echo "IMAGE_ID=$IMAGE_ID" >> $GITHUB_ENV
-            echo "Built GCP image ID is $IMAGE_ID"
+      # - name: get gcp image id
+      #   id: image_id_get
+      #   run: |
+      #       cd Assignment02
+      #       IMAGE_ID=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d ":" -f2)
+      #       echo "IMAGE_ID=$IMAGE_ID" >> $GITHUB_ENV
+      #       echo "Built GCP image ID is $IMAGE_ID"
               
-      - name: Generate version number
-        run: echo "VERSION_NUM=$(date +%s)" >> $GITHUB_ENV
+      # - name: Generate version number
+      #   run: echo "VERSION_NUM=$(date +%s)" >> $GITHUB_ENV
 
-      # Create a new Instance Template version
-      - name: Create Instance Template version
-        run: |
-          TEMPLATE="csye-instance-template-${{ env.VERSION_NUM }}"
-          gcloud compute instance-templates create csye-instance-template-${{ env.VERSION_NUM }} \
-            --project="csye6225-414121" \
-            --image="my-final-custom-image" \
-            --machine-type=n1-standard-1 \
-            --region="us-west2" \
-            --boot-disk-size=20 \
-            --boot-disk-type=pd-balanced \
-            --boot-disk-kms-key=${{ secrets.KMS_KEY }} \
-            --network="csye-vpc" \
-            --subnet="csye-webapp-subnet" \
-            --network-tier=PREMIUM \
-            --tags=webapp \
-            --instance-template-region=us-west2 \
-            --scopes=logging-write,monitoring-write,cloud-platform,pubsub \
-            --service-account="service-account-iam-id1@csye6225-414121.iam.gserviceaccount.com" \
-            --metadata=startup-script="#!/bin/bash
-            sudo bash -c 'cat <<EOF > /opt/unzippedWebapp/Assignment02/.env
-            DB_USERNAME=webapp
-            DB_NAME=webapp
-            DB_PASSWORD=${{ secrets.GCP_DB_PASSWORD }}
-            DB_HOST=${{ secrets.GCP_HOST }}
-            PORT=3000
-            EOF'
-            sudo chown -R csye6225:csye6225 /opt/unzippedWebapp/Assignment02
-            sudo chmod -R 755 /opt/unzippedWebapp/Assignment02
-            sudo systemctl restart csye6225.service"
+      # # Create a new Instance Template version
+      # - name: Create Instance Template version
+      #   run: |
+      #     TEMPLATE="csye-instance-template-${{ env.VERSION_NUM }}"
+      #     gcloud compute instance-templates create csye-instance-template-${{ env.VERSION_NUM }} \
+      #       --project="csye6225-414121" \
+      #       --image="my-final-custom-image" \
+      #       --machine-type=n1-standard-1 \
+      #       --region="us-west2" \
+      #       --boot-disk-size=20 \
+      #       --boot-disk-type=pd-balanced \
+      #       --boot-disk-kms-key=${{ secrets.KMS_KEY }} \
+      #       --network="csye-vpc" \
+      #       --subnet="csye-webapp-subnet" \
+      #       --network-tier=PREMIUM \
+      #       --tags=webapp \
+      #       --instance-template-region=us-west2 \
+      #       --scopes=logging-write,monitoring-write,cloud-platform,pubsub \
+      #       --service-account="service-account-iam-id1@csye6225-414121.iam.gserviceaccount.com" \
+      #       --metadata=startup-script="#!/bin/bash
+      #       sudo bash -c 'cat <<EOF > /opt/unzippedWebapp/Assignment02/.env
+      #       DB_USERNAME=webapp
+      #       DB_NAME=webapp
+      #       DB_PASSWORD=${{ secrets.GCP_DB_PASSWORD }}
+      #       DB_HOST=${{ secrets.GCP_HOST }}
+      #       PORT=3000
+      #       EOF'
+      #       sudo chown -R csye6225:csye6225 /opt/unzippedWebapp/Assignment02
+      #       sudo chmod -R 755 /opt/unzippedWebapp/Assignment02
+      #       sudo systemctl restart csye6225.service"
 
-      # Update the managed instance group to use the new template
-      - name: Update Managed Instance Group
-        run: |
-          gcloud compute instance-groups managed set-instance-template webapp-instance-group --region=us-west2 --template=projects/csye6225-414121/regions/us-west2/instanceTemplates/csye-instance-template-${{ env.VERSION_NUM }} --project=csye6225-414121
+      # # Update the managed instance group to use the new template
+      # - name: Update Managed Instance Group
+      #   run: |
+      #     gcloud compute instance-groups managed set-instance-template webapp-instance-group --region=us-west2 --template=projects/csye6225-414121/regions/us-west2/instanceTemplates/csye-instance-template-${{ env.VERSION_NUM }} --project=csye6225-414121
 
   
 
-      # Issue command to start a basic rolling update
-      - name: Start Rolling Update
-        run: |
-          gcloud compute instance-groups managed rolling-action start-update webapp-instance-group --version=template=projects/csye6225-414121/regions/us-west2/instanceTemplates/csye-instance-template-${{ env.VERSION_NUM }} --max-surge=5 --region=us-west2 --project=csye6225-414121
+      # # Issue command to start a basic rolling update
+      # - name: Start Rolling Update
+      #   run: |
+      #     gcloud compute instance-groups managed rolling-action start-update webapp-instance-group --version=template=projects/csye6225-414121/regions/us-west2/instanceTemplates/csye-instance-template-${{ env.VERSION_NUM }} --max-surge=5 --region=us-west2 --project=csye6225-414121
 
-      # Wait for the managed instance group to finish updating
-      - name: Wait for Instance Group Update
-        run: |
-          while true; do
-            STATUS=$(gcloud compute instance-groups managed describe webapp-instance-group \
-              --project="csye6225-414121" \
-              --region="us-west2" \
-              --format="value(currentActions)" \
-              | grep -c 'none')
-            if [ "$STATUS" == "1" ]; then
-              echo "Instance group update completed."
-              break
-            else
-              echo "Instance group still updating..."
-              sleep 10
-            fi
-          done
+      # # Wait for the managed instance group to finish updating
+      # - name: Wait for Instance Group Update
+      #   run: |
+      #     while true; do
+      #       STATUS=$(gcloud compute instance-groups managed describe webapp-instance-group \
+      #         --project="csye6225-414121" \
+      #         --region="us-west2" \
+      #         --format="value(currentActions)" \
+      #         | grep -c 'none')
+      #       if [ "$STATUS" == "1" ]; then
+      #         echo "Instance group update completed."
+      #         break
+      #       else
+      #         echo "Instance group still updating..."
+      #         sleep 10
+      #       fi
+      #     done
