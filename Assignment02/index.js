@@ -62,7 +62,7 @@ try{
 
 // routers
 app.use("/healthz",healthzRequest);
-app.use("/v1/user",userRouter);
+app.use("/v2/user",userRouter);
 
 // handling other endpoints
 app.use(function(request,response){
