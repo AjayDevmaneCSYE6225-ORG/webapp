@@ -21,7 +21,7 @@ describe('healthz endpoint test', () => {
 describe('create user', () => {
   it('create user successful', (done) => {
     request(app)
-      .post('/v1/user')
+      .post('/v2/user')
       .send(userData)
       .expect(201)
       .end((err, res) => {
@@ -37,7 +37,7 @@ describe('create user', () => {
 describe('get user endpoint test', () => {
   it('get user success', (done) => {
     request(app)
-      .get('/v1/user/self')
+      .get('/v2/user/self')
       .auth(userData.username, userData.password)
       .expect(200)
       .end((err, res) => {
@@ -53,7 +53,7 @@ describe('get user endpoint test', () => {
 describe('update user endpoint test', () => {
   it('put user success', (done) => {
     request(app)
-      .put('/v1/user/self')
+      .put('/v2/user/self')
       .auth(userData.username, userData.password)
       .send(updateUserData)
       .expect(204)
